@@ -22,37 +22,39 @@ function loadJSON() {
 function prepareObjects(jsonData) {
   jsonData.forEach((jsonObject) => {
     // TODO: Create new object with cleaned data - and store that in the allAnimals array
-    let name;
-    let type;
-    let desc;
-    let age;
 
-    // name = jsonObject.fullname.indexOf(" ") + 1;
-    name = jsonObject.fullname.substring(1, jsonObject.fullname.indexOf(" "));
-    type = jsonObject.fullname.substring(jsonObject.fullname.lastIndexOf(" ") + 1);
-    desc = jsonObject.fullname.substring(jsonObject.fullname.lastIndexOf("the") + 4, jsonObject.fullname.lastIndexOf(" "));
-    age = jsonObject.age;
+    // Create variables
+    // let name;
+    // let type;
+    // let desc;
+    // let age;
 
+    // Define a template for the data objects
     const Animal = {
       name: "",
       type: "",
       desc: "",
       age: "",
     };
-
+    // create a objects from a prototype
     const animal = Object.create(Animal);
-    animal.name = name;
-    animal.type = type;
-    animal.desc = desc;
-    animal.age = age;
+
+    // Find the rigth values/informations
+    animal.name = jsonObject.fullname.substring(0, jsonObject.fullname.indexOf(" "));
+    animal.type = jsonObject.fullname.substring(jsonObject.fullname.lastIndexOf(" ") + 1);
+    animal.desc = jsonObject.fullname.substring(jsonObject.fullname.lastIndexOf("the") + 4, jsonObject.fullname.lastIndexOf(" "));
+    animal.age = jsonObject.age;
     console.log("animal:", animal);
-    // TODO: MISSING CODE HERE !!!
+
+    //Push informations to list
+    allAnimals.push(animal);
   });
 
   displayList();
 }
 
 function displayList() {
+  console.log("displayList");
   // clear the list
   document.querySelector("#list tbody").innerHTML = "";
 
